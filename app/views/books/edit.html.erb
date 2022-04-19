@@ -1,0 +1,28 @@
+<h1>Editing Book</h1>
+
+<!-- バリデーションメッセージ -->
+<% if @book.errors.any? %>
+  <%= @book.errors.count %> errors prohibited this book from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+     <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @book, url: book_path(@book.id), method: :patch do |f| %>
+
+  <p class="common-text">Title</p>
+  <%= f.text_field :title %>
+
+  <p class="common-text">Body</p>
+  <%= f.text_area :body %>
+
+  <br></br>
+
+  <%= f.submit "Update Book" %>
+<% end %>
+
+<%= link_to "Show", book_path(@book.id) %>
+<span> | </span>
+<%= link_to "Back", books_path %>
